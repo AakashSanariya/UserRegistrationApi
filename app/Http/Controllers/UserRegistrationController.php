@@ -99,7 +99,6 @@ class UserRegistrationController extends Controller
      */
     public function updateDetails(Request $request, $id)
     {
-
         $validation = config('user_validation.Update_Validation');
         $validations = Validator::make($request->all(), $validation);
         if($validations->fails()){

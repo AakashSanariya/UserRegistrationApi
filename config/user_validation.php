@@ -27,7 +27,6 @@ return [
      * For User Information Details Update
     */
     'Update_Validation' => [
-        'image' => 'mimes:jpeg,jpg,png'
+        'image' => 'nullable|mimes:jpeg,jpg,png'
     ],
-
 ];

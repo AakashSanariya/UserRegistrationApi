@@ -127,7 +127,14 @@ class User extends Authenticatable
             $data = [
               'image' => 'user_image/'.$newImageName
             ];
-            $users =User::where('id', $id)->update($data);
+            $request = array_merge($request, $data);
+//            $users =User::where('id', $id)->update();
+        }
+        else{
+            $data = [
+                'image' => null,
+            ];
+            $request = array_merge($request, $data);
         }
         /*
             Remove All Null Elements In Array
