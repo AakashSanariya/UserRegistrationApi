@@ -145,7 +145,7 @@ class UserRegistrationController extends Controller
                 return $this->success(['token' => $loginUser], 'USER_LOGGIN_SUCCESS', 200);
             }
             else{
-                return $this->error('TOKEN_NOT_GENERATED', 401);
+                return $this->error('Credentials Not Matched', 401);
             }
         }
         catch (MethodNotFoundException $e){

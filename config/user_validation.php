@@ -11,6 +11,9 @@ return [
         'lastName' => 'required|min:3|alpha_num',
         'email' => 'required|unique:users|email',
         'image' => 'required|mimes:jpeg,jpg,png',
+        'DOB' => 'required|date',
+        'mobileNo' => 'required|min:10|max:10',
+        'gender' => 'required',
         'password' => 'required|min:6',
         'confirmPassword' => 'required|same:password|min:6'
     ],

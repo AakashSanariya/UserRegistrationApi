@@ -25,7 +25,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'firstName', 'lastName', 'email', 'image', 'password',
+        'firstName', 'lastName', 'email', 'image', 'DOB', 'mobileNo', 'gender', 'password',
     ];
 
     /**
@@ -86,6 +86,9 @@ class User extends Authenticatable
                 'lastName' => $request->lastName,
                 'email' => $request->email,
                 'image' => 'user_image/'.$newImageName,
+                'DOB' => $request->DOB,
+                'mobileNo' => $request->mobileNo,
+                'gender' => $request->gender,
                 'password' => md5($request->password)
             ];
             $register = User::create($imageData);
