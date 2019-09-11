@@ -142,7 +142,7 @@ class UserRegistrationController extends Controller
         try{
             $loginUser = User::getLogin($request);
             if($loginUser != null){
-                return $this->success(['token' => $loginUser], 'USER_LOGGIN_SUCCESS', 200);
+                return $this->success(['data' => $loginUser], 'USER_LOGGIN_SUCCESS', 200);
             }
             else{
                 return $this->error('Credentials Not Matched', 401);

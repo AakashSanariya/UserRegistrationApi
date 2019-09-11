@@ -7,8 +7,8 @@ return [
     */
 
     'Add_User_Validation' => [
-        'firstName' => 'required|min:3|alpha_num',
-        'lastName' => 'required|min:3|alpha_num',
+        'firstName' => 'required|min:3',
+        'lastName' => 'required|min:3',
         'email' => 'required|unique:users|email',
         'image' => 'required|mimes:jpeg,jpg,png',
         'DOB' => 'required|date',

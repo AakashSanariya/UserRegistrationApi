@@ -104,7 +104,11 @@ class User extends Authenticatable
             ->first();
         if($userCheck != null){
             $token = $userCheck->createToken('Create_Token')->accessToken;
-            return $token;
+            $data = [
+                'token' => $token,
+                'userId' => $userCheck->id
+            ];
+            return $data;
         }
         else{
             return null;
@@ -125,7 +129,9 @@ class User extends Authenticatable
         $oldDetails = User::find($id);
         $oldImage = $oldDetails['image'];
         if(isset($request['image'])){
-            unlink($oldDetails['image']);
+            if($oldDetails['image'] != null & $oldDetails['image'] != ""){
+                unlink($oldDetails['image']);
+            }
             $newImageName = self::ImageNameChange($request);
             $data = [
               'image' => 'user_image/'.$newImageName
