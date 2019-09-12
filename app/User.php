@@ -128,13 +128,14 @@ class User extends Authenticatable
     public static function updateDetails($request, $id) {
         $oldDetails = User::find($id);
         $oldImage = $oldDetails['image'];
+        $request['password'] = md5($request['password']);
         if(isset($request['image'])){
             if($oldDetails['image'] != null & $oldDetails['image'] != ""){
                 unlink($oldDetails['image']);
             }
             $newImageName = self::ImageNameChange($request);
             $data = [
-              'image' => 'user_image/'.$newImageName
+              'image' => 'user_image/'.$newImageName,
             ];
             $request = array_merge($request, $data);
 //            $users =User::where('id', $id)->update();
