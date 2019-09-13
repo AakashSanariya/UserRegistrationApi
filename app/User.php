@@ -128,7 +128,9 @@ class User extends Authenticatable
     public static function updateDetails($request, $id) {
         $oldDetails = User::find($id);
         $oldImage = $oldDetails['image'];
-        $request['password'] = md5($request['password']);
+        if(isset($request['password'])){
+            $request['password'] = md5($request['password']);
+        }
         if(isset($request['image'])){
             if($oldDetails['image'] != null & $oldDetails['image'] != ""){
                 unlink($oldDetails['image']);
