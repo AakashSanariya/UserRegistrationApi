@@ -106,7 +106,8 @@ class User extends Authenticatable
             $token = $userCheck->createToken('Create_Token')->accessToken;
             $data = [
                 'token' => $token,
-                'userId' => $userCheck->id
+                'userId' => $userCheck->id,
+                'userName' => $userCheck->firstName,
             ];
             return $data;
         }
