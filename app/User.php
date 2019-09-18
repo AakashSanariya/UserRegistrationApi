@@ -25,7 +25,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'firstName', 'lastName', 'email', 'image', 'DOB', 'mobileNo', 'gender', 'password',
+        'firstName', 'lastName', 'email', 'image', 'DOB', 'mobileNo', 'gender', 'password', 'status', 'role'
     ];
 
     /**
@@ -89,7 +89,9 @@ class User extends Authenticatable
                 'DOB' => $request->DOB,
                 'mobileNo' => $request->mobileNo,
                 'gender' => $request->gender,
-                'password' => md5($request->password)
+                'password' => md5($request->password),
+                'role' => $request->role,
+                'status' => $request->status,
             ];
             $register = User::create($imageData);
             return $request;
@@ -108,6 +110,7 @@ class User extends Authenticatable
                 'token' => $token,
                 'userId' => $userCheck->id,
                 'userName' => $userCheck->firstName,
+                'role' => $userCheck->role,
             ];
             return $data;
         }
