@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Prophecy\Exception\Doubler\MethodNotFoundException;
 
+/**
+ * Class UserRegistrationController
+ * @package App\Http\Controllers
+ */
 class UserRegistrationController extends Controller
 {
     /**
@@ -91,6 +95,24 @@ class UserRegistrationController extends Controller
     }
 
     /**
+     *
+     */
+    public function subAdminFind($subAdmin){
+        try{
+            $userDetails = User::adminFind($subAdmin);
+            if($userDetails == null){
+                return $this->error('USER_DETAILS_NOT_AVAILABLE', 404);
+            }
+            else{
+                return $this->success(['userDetails' => $userDetails], 'USER_DETAILS_SUCCESS', 200);
+            }
+        }
+        catch (MethodNotFoundException $e){
+            return $this->error($e->getMessage());
+        }
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -132,7 +154,11 @@ class UserRegistrationController extends Controller
             return $this->error($e->getMessage());
         }
     }
-    
+
+    /**
+     * @param Request $request
+     * @return \App\Http\Helpers\type
+     */
     public function login(Request $request){
         $validation = config('user_validation.Login_Validation');
         $validations = Validator::make($request->all(), $validation);

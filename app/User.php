@@ -128,6 +128,11 @@ class User extends Authenticatable
         $userDetails = User::find($id);
         return $userDetails;
     }
+
+    public static function adminFind($subAdmin){
+        $userDetails = User::all()->where('role', $subAdmin);
+        return $userDetails;
+    }
     
     public static function updateDetails($request, $id) {
         $oldDetails = User::find($id);
