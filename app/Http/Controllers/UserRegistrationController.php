@@ -97,9 +97,9 @@ class UserRegistrationController extends Controller
     /**
      *
      */
-    public function subAdminFind($subAdmin){
+    public function roleByUser($subAdmin){
         try{
-            $userDetails = User::adminFind($subAdmin);
+            $userDetails = User::userByRole($subAdmin);
             if($userDetails == null){
                 return $this->error('USER_DETAILS_NOT_AVAILABLE', 404);
             }

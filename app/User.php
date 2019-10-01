@@ -129,8 +129,8 @@ class User extends Authenticatable
         return $userDetails;
     }
 
-    public static function adminFind($subAdmin){
-        $userDetails = User::all()->where('role', $subAdmin);
+    public static function userByRole($subAdmin){
+        $userDetails = User::select()->where('role', $subAdmin)->get();
         return $userDetails;
     }
     
