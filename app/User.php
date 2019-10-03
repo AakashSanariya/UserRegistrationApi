@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Passport\HasApiTokens;
+use Yajra\DataTables\Facades\DataTables;
 
 /**
  * Class User
@@ -131,6 +132,7 @@ class User extends Authenticatable
 
     public static function userByRole($subAdmin){
         $userDetails = User::select()->where('role', $subAdmin)->get();
+        $userDetails = DataTables::of($userDetails)->make(true);
         return $userDetails;
     }
     
