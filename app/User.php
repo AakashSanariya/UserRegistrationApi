@@ -131,7 +131,7 @@ class User extends Authenticatable
     }
 
     public static function userByRole($subAdmin){
-        $userDetails = User::select()->where('role', $subAdmin)->get();
+        $userDetails = User::select()->where('role', $subAdmin);
         $userDetails = DataTables::of($userDetails)->make(true);
         return $userDetails;
     }
