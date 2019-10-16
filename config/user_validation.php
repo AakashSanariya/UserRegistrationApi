@@ -32,4 +32,18 @@ return [
     'Update_Validation' => [
         'image' => 'nullable|mimes:jpeg,jpg,png'
     ],
+
+    /*
+     *  For Video Upload  
+    */
+    'Video_Validation' => [
+        'videoName' => 'required|min:3',
+        'videoUrl' => 'required|mimetypes:video/mp4'
+    ],
+
+    /*
+     * For Video Update
+    */
+    'Video_Update_Validation' => [
+    ],
 ];

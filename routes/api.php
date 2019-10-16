@@ -18,4 +18,6 @@ Route::group(['middleware' => 'auth:api'], function (){
     Route::resource('user', 'UserRegistrationController');
     Route::post('user/update/{id}', 'UserRegistrationController@updateDetails');
     Route::post('user/rolebyuser/{name}', 'UserRegistrationController@roleByUser');
+    Route::resource('videoupload', 'VideoUploadController');
+    Route::post('video/update/{id}', 'VideoUploadController@update');
 });
