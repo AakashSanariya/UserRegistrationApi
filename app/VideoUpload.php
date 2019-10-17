@@ -87,4 +87,9 @@ class VideoUpload extends Model
             ->update($request);
         return $updateDetails;
     }
+    
+    public static function findVideo($id){
+        $videoDetails = self::find($id);
+        return $videoDetails;
+    }
 }

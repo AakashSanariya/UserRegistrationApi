@@ -69,7 +69,18 @@ class VideoUploadController extends Controller
      */
     public function show($id)
     {
-        //
+        try{
+            $videoDetails = VideoUpload::findVideo($id);
+            if($videoDetails == null){
+                return $this->error('VIDEO_DETAILS_NOT_AVAILABLE', 404);
+            }
+            else{
+                return $this->success(['videoList' => $videoDetails], 'VIDEO_DETAILS_SUCCESS', 200);
+            }
+        }
+        catch (MethodNotFoundException $e){
+            return $this->error($e->getMessage());
+        }
     }
 
     /**
