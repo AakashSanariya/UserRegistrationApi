@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Yajra\DataTables\DataTables;
 
 class VideoUpload extends Model
 {
@@ -49,7 +50,9 @@ class VideoUpload extends Model
     }
     
     public static function getallVideo(){
-        return self::get();
+        $videoDetails = self::get();
+        $videoDetails = DataTables::of($videoDetails)->make(true);
+        return $videoDetails;
     }
     
     public static function deleteVideo($id){
