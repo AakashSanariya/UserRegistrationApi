@@ -73,7 +73,7 @@ class VideoUpload extends Model
             }
             $newVideoName = self::videoNameChange($request);
             $data = [
-              'videoUrl' => $newVideoName
+              'videoUrl' => 'video/'.$newVideoName
             ];
             $request = array_merge($request, $data);
         }
