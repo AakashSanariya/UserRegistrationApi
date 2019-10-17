@@ -20,6 +20,6 @@ Route::group(['middleware' => 'auth:api'], function (){
     Route::post('user/rolebyuser/{name}', 'UserRegistrationController@roleByUser');
     Route::resource('videoupload', 'VideoUploadController');
     Route::post('videolist', 'VideoUploadController@index');
-    Route::post('video/find/{id}', 'VideoUploadController@show');
+    Route::get('video/find/{id}', 'VideoUploadController@show');
     Route::post('video/update/{id}', 'VideoUploadController@update');
 });
