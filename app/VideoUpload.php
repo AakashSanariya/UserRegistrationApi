@@ -12,7 +12,7 @@ class VideoUpload extends Model
     protected $fillable = [ 'id', 'videoName', 'videoUrl' ];
 
 
-    public static function videoNameChange($videoFile){
+public static function videoNameChange($videoFile){
         $originalName = $videoFile['videoUrl'];
         $videoExt = $originalName->getClientOriginalExtension();
         if($videoExt != "mp4"){
@@ -91,5 +91,10 @@ class VideoUpload extends Model
     public static function findVideo($id){
         $videoDetails = self::find($id);
         return $videoDetails;
+    }
+
+    public static function videoUploadNgx($request){
+        $addVideo = self::create($request->all());
+        return $addVideo;
     }
 }

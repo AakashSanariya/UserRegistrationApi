@@ -38,7 +38,7 @@ return [
     */
     'Video_Validation' => [
         'videoName' => 'required|min:3',
-        'videoUrl' => 'required|mimetypes:video/mp4'
+        'videoUrl' => 'mimetypes:video/mp4,video/mpeg4,video/3gpp'
     ],
 
     /*

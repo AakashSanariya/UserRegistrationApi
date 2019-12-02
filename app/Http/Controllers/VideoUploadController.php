@@ -3,10 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\VideoUpload;
+use Flow\Autoloader;
+use Flow\Basic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Prophecy\Exception\Doubler\MethodNotFoundException;
 use Symfony\Component\Routing\Exception\MethodNotAllowedException;
+use \Flow\Config;
+use \Flow\File;
+use Response;
 
 class VideoUploadController extends Controller
 {
@@ -131,6 +136,57 @@ class VideoUploadController extends Controller
                 return $this->error('USER_NOT_AVAILABLE', 404);
             }
             return $this->success(null, 'USER_DELETE_SUCCESS', 200);
+        }
+        catch(MethodNotFoundException $e){
+            return $this->error($e->getMessage());
+        }
+    }
+
+    public function chunkVideoUpload(Request $request){
+//        return $this->success(null, 'VIDEO_INSERT_SUCCESS', 200);
+    }
+    
+    public function chunkVideoUploadNgx(){
+
+        require_once(__DIR__ . '/../../../vendor/autoload.php');
+        $request = new \Flow\Request();
+        $config = new \Flow\Config(array(
+            'tempDir' => './tempChunk', //With write access
+        ));
+        $date = date("m-d-Y H:i:s");
+        $file = new \Flow\File($config, $request);
+        $response = Response::make('', 200);
+        $destination = './chunkVideo/'. $date .'_' . $request->getFileName();
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            if (!$file->checkChunk()) {
+                return $this->error('Request Header not Set', 204);
+            }
+        } else {
+            if ($file->validateChunk()) {
+                $file->saveChunk();
+
+            } else {
+                return $this->error('VIDEO_NOT_INSERTED', 400);
+            }
+        }
+        if ($file->validateFile() && $file->save($destination)) {
+            $response = $destination;
+        }
+        return $response;
+    }
+
+    public function chunkVideoUploadNgxUpload(Request $request){
+        $validation = config('user_validation.Video_Validation');
+        $validations = Validator::make($request->all(), $validation);
+        if($validations->fails()){
+            return $this->ValidationError($validations);
+        }
+        try{
+            $videoUpload = VideoUpload::videoUploadNgx($request);
+            if ($videoUpload == false){
+                return $this->error('!Opps Some Error Occurs');
+            }
+            return $this->success(null, 'VIDEO_INSERT_SUCCESS', 200);
         }
         catch(MethodNotFoundException $e){
             return $this->error($e->getMessage());
